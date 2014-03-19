@@ -1,0 +1,29 @@
+# Version: 7.2.0.2 (58c3efa)
+# [first argument, ignore] # /Users/rui/Projects/AnirolacC/Samples/iOS/AnirolacComponent.Samples.iOS/bin/iPhoneSimulator/Debug/mtouch.exe
+/Developer/MonoTouch/usr/bin/mtouch \
+	-sdkroot \
+	/Applications/Xcode.app/Contents/Developer \
+	--cache \
+	/Users/rui/Projects/AnirolacC/Samples/iOS/AnirolacComponent.Samples.iOS/obj/iPhoneSimulator/Debug/mtouch-cache \
+	--nomanifest \
+	--nosign \
+	-sim \
+	/Users/rui/Projects/AnirolacC/Samples/iOS/AnirolacComponent.Samples.iOS/bin/iPhoneSimulator/Debug/AnirolacComponentSamplesiOS.app \
+	-r \
+	/Users/rui/Projects/AnirolacC/src/lib/ios/AnirolacComponent.IOS.dll \
+	-r \
+	/Developer/MonoTouch/usr/lib/mono/2.1/System.dll \
+	-r \
+	/Developer/MonoTouch/usr/lib/mono/2.1/System.Xml.dll \
+	-r \
+	/Developer/MonoTouch/usr/lib/mono/2.1/System.Core.dll \
+	-r \
+	/Developer/MonoTouch/usr/lib/mono/2.1/monotouch.dll \
+	-debug \
+	-nolink \
+	-sdk \
+	7.1 \
+	-targetver \
+	7.0 \
+	--abi=i386 \
+	/Users/rui/Projects/AnirolacC/Samples/iOS/AnirolacComponent.Samples.iOS/bin/iPhoneSimulator/Debug/AnirolacComponentSamplesiOS.exe \

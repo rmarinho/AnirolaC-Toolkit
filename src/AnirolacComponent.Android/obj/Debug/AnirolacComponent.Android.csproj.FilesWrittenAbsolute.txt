@@ -1,0 +1,12 @@
+/Users/rui/Projects/AnirolacC/src/AnirolacComponent.Android/obj/Debug/MonoAndroid,Version=v4.4.AssemblyAttribute.cs
+/Users/rui/Projects/AnirolacC/src/AnirolacComponent.Android/obj/Debug/AnirolacComponent.obj.Debug.__AndroidLibraryProjects__.zip
+/Users/rui/Projects/AnirolacC/lib/android/AnirolacComponent.Android.dll.mdb
+/Users/rui/Projects/AnirolacC/lib/android/AnirolacComponent.Android.dll
+/Users/rui/Projects/AnirolacC/lib/android/AnirolacComponent.Android.apk
+/Users/rui/Projects/AnirolacC/src/AnirolacComponent.Android/obj/Debug/android/bin/AnirolacComponent.Android.apk
+/Users/rui/Projects/AnirolacC/src/AnirolacComponent.Android/obj/Debug/res/values/strings.xml
+/Users/rui/Projects/AnirolacC/src/AnirolacComponent.Android/obj/Debug/R.cs.flag
+/Users/rui/Projects/AnirolacC/lib/android/AnirolacComponent.Android-Signed.apk
+/Users/rui/Projects/AnirolacC/src/AnirolacComponent.Android/obj/Debug/uploadflags.txt
+/Users/rui/Projects/AnirolacC/src/AnirolacComponent.Android/obj/Debug/AnirolacComponent.Android.dll
+/Users/rui/Projects/AnirolacC/src/AnirolacComponent.Android/obj/Debug/AnirolacComponent.Android.dll.mdb

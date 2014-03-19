@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnirolacComponent.Samples.iOS", "AnirolacComponent.Samples.iOS\AnirolacComponent.Samples.iOS.csproj", "{1CEDAD14-761D-47D7-9557-355F92BE3471}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnirolacComponent.IOS", "..\..\src\AnirolacComponent.IOS\AnirolacComponent.IOS.csproj", "{3D4FAC41-A7D6-4AD4-BA8A-6DBC378C7D15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CEDAD14-761D-47D7-9557-355F92BE3471}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{1CEDAD14-761D-47D7-9557-355F92BE3471}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{1CEDAD14-761D-47D7-9557-355F92BE3471}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{1CEDAD14-761D-47D7-9557-355F92BE3471}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{1CEDAD14-761D-47D7-9557-355F92BE3471}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{1CEDAD14-761D-47D7-9557-355F92BE3471}.Debug|iPhone.Build.0 = Debug|iPhone
+		{1CEDAD14-761D-47D7-9557-355F92BE3471}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{1CEDAD14-761D-47D7-9557-355F92BE3471}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{1CEDAD14-761D-47D7-9557-355F92BE3471}.Release|iPhone.ActiveCfg = Release|iPhone
+		{1CEDAD14-761D-47D7-9557-355F92BE3471}.Release|iPhone.Build.0 = Release|iPhone
+		{1CEDAD14-761D-47D7-9557-355F92BE3471}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{1CEDAD14-761D-47D7-9557-355F92BE3471}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{3D4FAC41-A7D6-4AD4-BA8A-6DBC378C7D15}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{3D4FAC41-A7D6-4AD4-BA8A-6DBC378C7D15}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{3D4FAC41-A7D6-4AD4-BA8A-6DBC378C7D15}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{3D4FAC41-A7D6-4AD4-BA8A-6DBC378C7D15}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{3D4FAC41-A7D6-4AD4-BA8A-6DBC378C7D15}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{3D4FAC41-A7D6-4AD4-BA8A-6DBC378C7D15}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{3D4FAC41-A7D6-4AD4-BA8A-6DBC378C7D15}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{3D4FAC41-A7D6-4AD4-BA8A-6DBC378C7D15}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{3D4FAC41-A7D6-4AD4-BA8A-6DBC378C7D15}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{3D4FAC41-A7D6-4AD4-BA8A-6DBC378C7D15}.Release|iPhone.Build.0 = Release|Any CPU
+		{3D4FAC41-A7D6-4AD4-BA8A-6DBC378C7D15}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{3D4FAC41-A7D6-4AD4-BA8A-6DBC378C7D15}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = AnirolacComponent.Samples.iOS\AnirolacComponent.Samples.iOS.csproj
+	EndGlobalSection
+EndGlobal

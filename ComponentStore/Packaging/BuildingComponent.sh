@@ -1,0 +1,14 @@
+mono xamarin-component.exe create-manually Anirolac-1.0.xam \
+    --name="Aniroloc Toolkit" \
+    --summary="Cross platform toolkit with modern UI controls." \
+    --publisher="ruimarinho.NET" \
+    --website="http://ruimarinho.net" \
+    --details="../Details.md" \
+    --license="../License.md" \
+    --getting-started="../GettingStarted.md" \
+    --icon="../../Art/icons/Anirolac_128x128.png" \
+    --icon="../../Art/icons/Anirolac_512x512.png" \
+    --library="ios":"../../lib/ios/AnirolacComponent.IOS.dll" \
+    --library="android":"../../lib/android/AnirolacComponent.Android.dll" \
+    --sample="Aniroloc Toolkit. Demonstrates the toolkit on iOS.":"../../Samples/iOS/AnirolacComponent.Samples.iOS.sln" \
+    --sample="Aniroloc Toolkit. Demonstrates the toolkit on Android":"../../Samples/Android/AnirolacComponent.Samples.Android.sln"
