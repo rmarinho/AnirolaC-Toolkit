@@ -19,13 +19,21 @@ namespace AnirolacComponent
 			}
 		}
 
-		UIView mainView;
+
 		UIPageControl pageControl;
 		UIScrollView scroller;
-		public ImageGallery (List<string> imags)
+		public ImageGallery (List<string> images = null, RectangleF frame = default(RectangleF))
 		{
-			mainView = new UIView ();
-			Images = new ObservableCollection<string> (imags);
+			if (frame == default(RectangleF))
+				this.Frame = UIScreen.MainScreen.Bounds;
+			else
+				this.Frame = frame;
+
+			if (images != null)
+				Images = new ObservableCollection<string> (images);
+			else
+				Images = new ObservableCollection<string> ();
+
 			Images.CollectionChanged+= HandleCollectionChanged;
 
 			pageControl = new UIPageControl ();

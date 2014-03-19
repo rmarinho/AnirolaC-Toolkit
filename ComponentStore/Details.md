@@ -1,11 +1,8 @@
-First of all, give a short description of what your component does and
-why someone would want to put it in their apps.
+Anirolac Toolkit contains some ui controls that you can add to your applications.
 
-Then include a succinct code snippet or two showing the minimum viable
-integration of your component into the user's app.
 
 ```csharp
-using MyComponentNamespace;
+using Anirolac;
 ...
 
 public override void ViewDidLoad ()

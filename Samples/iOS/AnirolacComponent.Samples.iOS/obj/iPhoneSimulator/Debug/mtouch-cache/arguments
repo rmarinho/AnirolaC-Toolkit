@@ -10,7 +10,7 @@
 	-sim \
 	/Users/rui/Projects/AnirolacC/Samples/iOS/AnirolacComponent.Samples.iOS/bin/iPhoneSimulator/Debug/AnirolacComponentSamplesiOS.app \
 	-r \
-	/Users/rui/Projects/AnirolacC/src/lib/ios/AnirolacComponent.IOS.dll \
+	/Users/rui/Projects/AnirolacC/lib/ios/AnirolacComponent.IOS.dll \
 	-r \
 	/Developer/MonoTouch/usr/lib/mono/2.1/System.dll \
 	-r \

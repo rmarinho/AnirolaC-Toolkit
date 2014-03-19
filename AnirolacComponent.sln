@@ -7,8 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnirolacComponent.Android",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9C405080-C893-421A-8EDD-FEAF0484F3F8}"
 	ProjectSection(SolutionItems) = preProject
-		License.md = License.md
 		README.md = README.md
+		ComponentStore\Details.md = ComponentStore\Details.md
+		ComponentStore\GettingStarted.md = ComponentStore\GettingStarted.md
+		ComponentStore\License.md = ComponentStore\License.md
 	EndProjectSection
 EndProject
 Global

@@ -1,9 +1,8 @@
-You may want to redescribe your component here, but the purpose of this
-document is to guide the user through creating their first app using
-your component.
+Anirolac Toolkit contains some ui controls that you can add to your applications.
+
 
 ```csharp
-using MyComponentNameSpace;
+using Anirolac;
 ...
 
 public override void ViewDidLoad ()
@@ -14,6 +13,5 @@ public override void ViewDidLoad ()
 
 ## Other Resources
 
-* [Component Documentation](http://google.com)
-* [Support Forums](http://google.com)
-* [Source Code Repository](http://google.com)
+* [Component Documentation](http://ruimarinho.net/anirolac-toolkit)
+* [Source Code Repository](http://github.com/rmarinho/AnirolaC-Toolkit)

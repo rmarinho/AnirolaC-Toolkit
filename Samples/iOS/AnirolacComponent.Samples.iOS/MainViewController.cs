@@ -22,7 +22,7 @@ namespace AnirolacComponent.Samples.iOS
 			images.Add ("algarvesurfschool3.jpg");
 			images.Add ("algarvesurfschool4.jpg");
 			var imageGallery = new ImageGallery (images);
-			imageGallery.Frame = new System.Drawing.RectangleF (0, 0, UIScreen.MainScreen.Bounds.Width, 270);
+				imageGallery.Frame = new System.Drawing.RectangleF (0, 0, UIScreen.MainScreen.Bounds.Width, 270);
 			this.View.Add (imageGallery);
 		}
 	}

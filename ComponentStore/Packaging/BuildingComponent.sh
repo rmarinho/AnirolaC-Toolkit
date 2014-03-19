@@ -1,8 +1,8 @@
 mono xamarin-component.exe create-manually Anirolac-1.0.xam \
-    --name="Aniroloc Toolkit" \
+    --name="Anirolac Toolkit" \
     --summary="Cross platform toolkit with modern UI controls." \
     --publisher="ruimarinho.NET" \
-    --website="http://ruimarinho.net" \
+    --website="http://ruimarinho.net/blog/anirolac-toolkit" \
     --details="../Details.md" \
     --license="../License.md" \
     --getting-started="../GettingStarted.md" \
