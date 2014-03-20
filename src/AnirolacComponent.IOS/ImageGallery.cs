@@ -39,6 +39,7 @@ namespace AnirolacComponent
 			pageControl = new UIPageControl ();
 			pageControl.ValueChanged += HandlePageControlHeadValueChanged;
 			scroller = new UIScrollView ();
+		
 			scroller.PagingEnabled = true;
 			scroller.Bounces = false;
 			scroller.Scrolled+= (object sender, EventArgs e) => {
@@ -52,7 +53,6 @@ namespace AnirolacComponent
 		}
 
 	
-
 		public override void Draw (System.Drawing.RectangleF rect)
 		{
 			//		mainView.Frame = rect;
