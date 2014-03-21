@@ -28,6 +28,7 @@ namespace AnirolacComponent
 		UIScrollView scroller;
 		public ImageGallery (List<string> images = null, RectangleF frame = default(RectangleF))
 		{
+			this.BackgroundColor = UIColor.White;
 			if (frame == default(RectangleF))
 				this.Frame = UIScreen.MainScreen.Bounds;
 			else
@@ -68,8 +69,8 @@ namespace AnirolacComponent
 			foreach (var im in  Images) {
 				try {
 					var img = new UIImage();
-
-					if(Helpers.IsValidUrl(im))
+					var isRemote = Helpers.IsValidUrl(im);
+					if(isRemote)
 						//dont await , fire and forget
 						LoadImageAsync(curr,im);
 					else
@@ -79,7 +80,7 @@ namespace AnirolacComponent
 					imgView.Alpha = 0;
 
 					//if first image is local, fade it in
-					if(curr == 0)
+					if(curr == 0 && !isRemote)
 						FadeImageViewIn(imgView);
 
 					imgView.Frame = new System.Drawing.RectangleF (rect.Width * curr, rect.Top, rect.Width, rect.Height);
@@ -133,7 +134,7 @@ namespace AnirolacComponent
 		static void FadeImageViewIn (UIImageView imgView, UIImage img = null)
 		{
 
-			UIView.Animate (0.3, 0, UIViewAnimationOptions.CurveEaseInOut, () =>  {
+			UIView.Animate (0.3, 0, UIViewAnimationOptions.TransitionCrossDissolve, () =>  {
 				if(img!= null)
 				{
 					imgView.Image	= img;
