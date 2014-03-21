@@ -9,8 +9,8 @@ using System.CodeDom.Compiler;
 
 namespace AnirolacComponent.Samples.iOS
 {
-	[Register ("MainViewController")]
-	partial class MainViewController
+	[Register ("ImageGalleryViewController")]
+	partial class ImageGalleryViewController
 	{
 		
 		void ReleaseDesignerOutlets ()
