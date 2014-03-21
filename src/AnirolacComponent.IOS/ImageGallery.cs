@@ -26,9 +26,9 @@ namespace AnirolacComponent
 			}
 		}
 
-
 		UIPageControl pageControl;
 		UIScrollView scroller;
+		RectangleF _initialRecView;
 
 		public ImageGallery (List<string> images) : this(images,default(RectangleF))
 		{
@@ -49,12 +49,11 @@ namespace AnirolacComponent
 			else
 				Images = new ObservableCollection<string> ();
 
-			Images.CollectionChanged+= HandleCollectionChanged;
-
+		
 			pageControl = new UIPageControl ();
 			pageControl.AutoresizingMask = UIViewAutoresizing.All;
 			pageControl.ContentMode = UIViewContentMode.ScaleToFill;
-			pageControl.ValueChanged += HandlePageControlHeadValueChanged;
+			pageControl.ValueChanged += (object sender, EventArgs e) => UpdateScrollPositionBasedOnPageControl();
 
 			scroller = new UIScrollView ();
 			scroller.AutoresizingMask = UIViewAutoresizing.All;
@@ -63,25 +62,27 @@ namespace AnirolacComponent
 			scroller.PagingEnabled = true;
 			scroller.Bounces = false;
 
-			scroller.Scrolled+= (object sender, EventArgs e) => {
 
-				var pageWidth = double.Parse(scroller.Bounds.Width.ToString());
-				var oof = double.Parse(scroller.ContentOffset.X.ToString());
-				int pageNumber = int.Parse(( Math.Floor((oof - pageWidth / 2) / pageWidth) + 1).ToString());
-				var imgView = scroller.Subviews[pageNumber] as UIImageView;
-				FadeImageViewIn (imgView);
-				pageControl.CurrentPage = pageNumber;
-			};
 			this.Add (scroller);
 			this.Add (pageControl);
 
 		
 		}
 
-		private RectangleF _initialRecView;
+		protected override void Dispose (bool disposing)
+		{
+			base.Dispose (disposing);
+			scroller.Scrolled -= ScrollChanged;
+			Images.CollectionChanged -= HandleCollectionChanged;
+			Images.Clear ();
+		}
 		public  override void Draw (System.Drawing.RectangleF rect)
 		{
 			_initialRecView = rect;
+			Images.CollectionChanged+= HandleCollectionChanged;
+			scroller.Scrolled += ScrollChanged;
+
+			//TODO: need to remove observer if using the lambda?
 			NSNotificationCenter.DefaultCenter.AddObserver (UIApplication.DidChangeStatusBarOrientationNotification, not => {
 			
 				var orientation = UIDevice.CurrentDevice.Orientation;
@@ -94,33 +95,14 @@ namespace AnirolacComponent
 					scroller.ContentSize = new System.Drawing.SizeF (rect.Width * Images.Count-1, rect.Height);
 
 				}
-
+				UpdateScrollPositionBasedOnPageControl();
 			});
 			pageControl.Frame = new System.Drawing.RectangleF (rect.Left,rect.Height-40, rect.Width,40);
 			scroller.Frame = new System.Drawing.RectangleF (rect.Left,rect.Top, rect.Width, rect.Height);
 			var curr = 0;
 			foreach (var im in  Images) {
 				try {
-					var img = new UIImage();
-					var isRemote = Helpers.IsValidUrl(im);
-					if(isRemote)
-						//dont await , fire and forget
-						LoadImageAsync(curr,im);
-					else
-						img = UIImage.FromFile(im);
-
-					var imgView = new UIImageView (img);
-					imgView.AutoresizingMask = UIViewAutoresizing.All;
-					imgView.ContentMode = UIViewContentMode.ScaleToFill;
-					if(FadeImages)
-						imgView.Alpha = 0;
-
-					//if first image is local, fade it in
-					if(curr == 0 && !isRemote)
-						FadeImageViewIn(imgView);
-
-					imgView.Frame = new System.Drawing.RectangleF (rect.Width * curr, rect.Top, rect.Width, rect.Height);
-					scroller.AddSubview (imgView);
+					AddImage (rect,curr,im);
 					curr++;
 				} catch (Exception ex) {
 
@@ -133,6 +115,27 @@ namespace AnirolacComponent
 			base.Draw (rect);
 		}
 
+		private void AddImage (RectangleF rect, int position, string im)
+		{
+			var img = new UIImage ();
+			var isRemote = Helpers.IsValidUrl (im);
+			if (isRemote)
+				//dont await , fire and forget
+				LoadImageAsync (position, im);
+			else
+				img = UIImage.FromFile (im);
+			var imgView = new UIImageView (img);
+			imgView.AutoresizingMask = UIViewAutoresizing.All;
+			imgView.ContentMode = UIViewContentMode.ScaleToFill;
+			if (FadeImages)
+				imgView.Alpha = 0;
+			//if first image is local, fade it in
+			if (position == 0 && !isRemote)
+				FadeImageViewIn (imgView);
+			imgView.Frame = new System.Drawing.RectangleF (rect.Width * position, rect.Top, rect.Width, rect.Height);
+			scroller.AddSubview (imgView);
+
+		}
 
 
 		private Task LoadImageAsync(int position, string url)
@@ -151,31 +154,48 @@ namespace AnirolacComponent
 			});
 
 		}
-
-		private void HandlePageControlHeadValueChanged(object sender, EventArgs e)
+		void ScrollChanged (object sender, EventArgs e)
 		{
-			var off = this.pageControl.CurrentPage  * this.scroller.Frame.Width;
-			scroller.SetContentOffset(new PointF(off, 0), true);
+			var pageWidth = double.Parse(scroller.Bounds.Width.ToString());
+			var oof = double.Parse(scroller.ContentOffset.X.ToString());
+			int pageNumber = int.Parse(( Math.Floor((oof - pageWidth / 2) / pageWidth) + 1).ToString());
+			var imgView = scroller.Subviews[pageNumber] as UIImageView;
+			FadeImageViewIn (imgView);
+			pageControl.CurrentPage = pageNumber;
 		}
 
 		void HandleCollectionChanged (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
 
 			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
+				foreach (var newImage in e.NewItems) {
+					try {
+						AddImage (Frame, pageControl.Pages, newImage as string);
+						scroller.ContentSize = new System.Drawing.SizeF (Frame.Width * (pageControl.Pages+1), scroller.Frame.Height);
+						pageControl.Pages = pageControl.Pages+1;
+					} catch (Exception ex) {
+						
+					}
 
+
+				}
 			}
 
 		}
 
-		static void SetImage (UIImageView imgView, UIImage img)
+		private void SetImage (UIImageView imgView, UIImage img)
 		{
 			if (img != null) {
 				imgView.Image = img;
 			}
 			imgView.Alpha = 1;
 		}
-
-		 void FadeImageViewIn (UIImageView imgView, UIImage img = null)
+		private void UpdateScrollPositionBasedOnPageControl()
+		{
+			var off = this.pageControl.CurrentPage  * this.scroller.Frame.Width;
+			scroller.SetContentOffset(new PointF(off, 0), true);
+		}
+		private void FadeImageViewIn (UIImageView imgView, UIImage img = null)
 		{
 
 			if (FadeImages)

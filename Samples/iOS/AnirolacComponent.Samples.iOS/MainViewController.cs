@@ -5,6 +5,8 @@ using System;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace AnirolacComponent.Samples.iOS
 {
@@ -14,22 +16,37 @@ namespace AnirolacComponent.Samples.iOS
 		{
 		}
 
+		ImageGallery imageGallery;
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
 			var images = new List<string> ();
-
-			images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool2.jpg");
-			images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool2.jpg");
-			images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool4.jpg");
-			images.Add ("algarvesurfschool2.jpg");
 			images.Add ("algarvesurfschool3.jpg");
-			images.Add ("algarvesurfschool4.jpg");
+//			images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool2.jpg");
+//			images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool2.jpg");
+//			images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool4.jpg");
+			images.Add ("algarvesurfschool2.jpg");
 
 
-			var imageGallery = new ImageGallery (images);
+			imageGallery = new ImageGallery (images);
 
 			this.View.Add (imageGallery);
+		}
+
+		public override void ViewDidAppear (bool animated)
+		{
+			base.ViewDidAppear (animated);
+				DelayedTask ();
+		}
+
+		private Task DelayedTask ()
+		{
+			return Task.Run(()=>{
+				Thread.Sleep(2000);
+				this.BeginInvokeOnMainThread(()=> imageGallery.Images.Add("algarvesurfschool4.jpg"));
+				Thread.Sleep(1000);
+				this.BeginInvokeOnMainThread(()=> imageGallery.Images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool4.jpg"));
+			});
 		}
 	}
 }
