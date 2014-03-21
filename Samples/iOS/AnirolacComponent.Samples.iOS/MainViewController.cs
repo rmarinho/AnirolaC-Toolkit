@@ -18,23 +18,15 @@ namespace AnirolacComponent.Samples.iOS
 		{
 			base.ViewDidLoad ();
 			var images = new List<string> ();
-			images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool2.jpg");
-			images.Add ("algarvesurfschool2.jpg");
-			images.Add ("algarvesurfschool3.jpg");
-			images.Add ("algarvesurfschool4.jpg");
-
-			images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool2.jpg");
-			images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool2.jpg");
-			images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool4.jpg");
+		
 			images.Add ("algarvesurfschool2.jpg");
 			images.Add ("algarvesurfschool3.jpg");
 			images.Add ("algarvesurfschool4.jpg");
 
 
-			var imageGallery = new ImageGallery (images, new System.Drawing.RectangleF(0,0,320,260));
+			var imageGallery = new ImageGallery (images);
 
 			this.View.Add (imageGallery);
-			imageGallery.Images.Add ("algarvesurfschool4.jpg");
 		}
 	}
 }
