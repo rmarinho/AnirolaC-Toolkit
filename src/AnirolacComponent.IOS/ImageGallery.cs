@@ -9,8 +9,7 @@ using MonoTouch.Foundation;
 
 namespace AnirolacComponent
 {
-	//TODO: Support orientation change
-	//TODO: Autosize 
+
 	public class ImageGallery : UIView
 	{
 		public bool FadeImages {
@@ -38,7 +37,7 @@ namespace AnirolacComponent
 		{
 			this.AutoresizingMask = UIViewAutoresizing.All;
 			this.ContentMode = UIViewContentMode.ScaleToFill;
-			FadeImages = false;
+			FadeImages = true;
 			this.BackgroundColor = UIColor.White;
 			if (frame == default(RectangleF))
 				this.Frame = UIScreen.MainScreen.Bounds;

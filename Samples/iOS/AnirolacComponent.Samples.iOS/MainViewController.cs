@@ -18,7 +18,10 @@ namespace AnirolacComponent.Samples.iOS
 		{
 			base.ViewDidLoad ();
 			var images = new List<string> ();
-		
+
+			images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool2.jpg");
+			images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool2.jpg");
+			images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool4.jpg");
 			images.Add ("algarvesurfschool2.jpg");
 			images.Add ("algarvesurfschool3.jpg");
 			images.Add ("algarvesurfschool4.jpg");
