@@ -40,5 +40,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Compile Include="ImageGallery.cs" />
+    <Compile Include="Helpers.cs" />
   </ItemGroup>
 </Project>
