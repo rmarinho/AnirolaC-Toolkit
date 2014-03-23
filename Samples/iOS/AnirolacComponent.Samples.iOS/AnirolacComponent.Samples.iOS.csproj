@@ -107,9 +107,13 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="MainViewController.cs" />
-    <Compile Include="MainViewController.designer.cs">
-      <DependentUpon>MainViewController.cs</DependentUpon>
+    <Compile Include="GridViewViewController.cs" />
+    <Compile Include="GridViewViewController.designer.cs">
+      <DependentUpon>GridViewViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageGalleryViewController.cs" />
+    <Compile Include="ImageGalleryViewController.designer.cs">
+      <DependentUpon>ImageGalleryViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,7 @@ namespace AnirolacComponent
 			ContentView.Layer.BorderColor = UIColor.LightGray.CGColor;
 			ContentView.Layer.BorderWidth = 2.0f;
 			ContentView.BackgroundColor = UIColor.White;
-			ContentView.Transform = CGAffineTransform.MakeScale (0.8f, 0.8f);
+			//	ContentView.Transform = CGAffineTransform.MakeScale (0.8f, 0.8f);
 
 			imageView = new UIImageView (frame);
 			imageView.Center = ContentView.Center;
