@@ -1,25 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="PMd-Qn-jzK">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <!--Image Gallery View Controller - Image Gallery-->
+        <scene sceneID="ddz-N7-YBZ">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="MainViewController" sceneMemberID="viewController">
+                <viewController id="rGz-Jq-xT6" customClass="ImageGalleryViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="enq-ZT-rJB"/>
-                        <viewControllerLayoutGuide type="bottom" id="Yhg-5W-c3u"/>
+                        <viewControllerLayoutGuide type="top" id="O1f-gE-Xib"/>
+                        <viewControllerLayoutGuide type="bottom" id="1EZ-jL-lNa"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" contentMode="scaleToFill" id="swn-wp-0fK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Image Gallery" id="puR-RR-jY7"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R2y-dj-ZCD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1822" y="-395"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="V3i-Ig-xkw">
+            <objects>
+                <tabBarController definesPresentationContext="YES" id="PMd-Qn-jzK" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="xcH-hB-04u">
+                        <rect key="frame" x="129" y="330" width="163" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="rGz-Jq-xT6" kind="relationship" relationship="viewControllers" id="lf0-kb-zYr"/>
+                        <segue destination="JPJ-FP-poP" kind="relationship" relationship="viewControllers" id="A2N-r0-D2S"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="79U-fN-Rla" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1288" y="-68"/>
+        </scene>
+        <!--Grid View View Controller - GridViewViewController-->
+        <scene sceneID="fjN-Do-MVN">
+            <objects>
+                <viewController title="GridViewViewController" id="JPJ-FP-poP" customClass="GridViewViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bWc-1T-BnK"/>
+                        <viewControllerLayoutGuide type="bottom" id="wos-QS-UAa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sjz-9e-nyl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Grid View" id="J1N-l7-wWp"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VhG-wt-cpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1822" y="258"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

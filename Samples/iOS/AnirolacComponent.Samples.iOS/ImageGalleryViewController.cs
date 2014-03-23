@@ -4,13 +4,47 @@ using System;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace AnirolacComponent.Samples.iOS
 {
 	public partial class ImageGalleryViewController : UIViewController
 	{
+		ImageGallery imageGallery;
 		public ImageGalleryViewController (IntPtr handle) : base (handle)
 		{
+		}
+
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+
+			var images = new List<string> ();
+			images.Add ("algarvesurfschool3.jpg");
+			images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool4.jpg");
+			images.Add ("algarvesurfschool2.jpg");
+
+
+			imageGallery = new ImageGallery (images);
+			this.Add (imageGallery);
+		}
+		public override void ViewDidAppear (bool animated)
+		{
+			base.ViewDidAppear (animated);
+			//Fire and forget
+			DelayedTask ();
+		}
+
+		private Task DelayedTask ()
+		{
+			return Task.Run(()=>{
+				Thread.Sleep(2000);
+				this.BeginInvokeOnMainThread(()=> imageGallery.Images.Add("algarvesurfschool4.jpg"));
+				Thread.Sleep(1000);
+				this.BeginInvokeOnMainThread(()=> imageGallery.Images.Add ("https://dl.dropboxusercontent.com/u/1966569/algarvesurfschool4.jpg"));
+			});
 		}
 	}
 }

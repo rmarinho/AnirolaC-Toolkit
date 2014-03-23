@@ -4,6 +4,7 @@ using System;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using System.Collections.Generic;
 
 namespace AnirolacComponent.Samples.iOS
 {
@@ -12,5 +13,57 @@ namespace AnirolacComponent.Samples.iOS
 		public GridViewViewController (IntPtr handle) : base (handle)
 		{
 		}
+
+		GridView _gridView;
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+			_gridView = new GridView (View.Bounds);
+			_gridView.DataSource = new TableSource ();
+			this.Add (_gridView);
+		}
+	}
+
+	public class TableSource : UICollectionViewDataSource
+	{
+		static NSString animalCellId = new NSString ("AnimalCell");
+
+		List<string> items = new List<string> ();
+		public TableSource ()
+		{
+			items.Add ("ola");
+			items.Add ("adeus");
+			items.Add ("ola");
+			items.Add ("adeus");
+			items.Add ("ola");
+			items.Add ("adeus");
+			items.Add ("ola");
+			items.Add ("adeus");
+			items.Add ("ola");
+			items.Add ("adeus");
+			items.Add ("ola");
+			items.Add ("adeus");
+			items.Add ("ola");
+			items.Add ("adeus");
+
+		}
+		#region implemented abstract members of UICollectionViewDataSource
+		public override int GetItemsCount (UICollectionView collectionView, int section)
+		{
+			return items.Count;
+		}
+		public override UICollectionViewCell GetCell (UICollectionView collectionView, NSIndexPath indexPath)
+		{
+			var animalCell = (GridViewItemCell)collectionView.DequeueReusableCell (animalCellId, indexPath);
+
+			var animal = items [indexPath.Row];
+
+			animalCell.Image = UIImage.FromFile("algarvesurfschool3.jpg");
+
+			return animalCell;
+		}
+		#endregion
+
+
 	}
 }
