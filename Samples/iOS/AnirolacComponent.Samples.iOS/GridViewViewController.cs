@@ -32,7 +32,7 @@ namespace AnirolacComponent.Samples.iOS
 		public TableSource ()
 		{
 			for (int i = 0; i < 100; i++) {
-				items.Add ("hello");
+				items.Add ("hello " +  i);
 			}
 		}
 		#region implemented abstract members of UICollectionViewDataSource
