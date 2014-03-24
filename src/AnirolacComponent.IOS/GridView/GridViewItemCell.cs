@@ -2,41 +2,67 @@
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 using MonoTouch.CoreGraphics;
+using System.Drawing;
 
 namespace AnirolacComponent
 {
 	public class GridViewItemCell : UICollectionViewCell
 	{
 	
-
-		UIImageView imageView;
+		public override void Draw (System.Drawing.RectangleF rect)
+		{
+			base.Draw (rect);
+		}
+		UILabel txtView;
 
 		[Export ("initWithFrame:")]
 		public GridViewItemCell (System.Drawing.RectangleF frame) : base (frame)
 		{
-			BackgroundView = new UIView{BackgroundColor = UIColor.Orange};
+			SelectedBackgroundView = new GridItemSelectedViewOverlay(frame);
+			this.BringSubviewToFront (SelectedBackgroundView);
 
-			SelectedBackgroundView = new UIView{BackgroundColor = UIColor.Green};
-
-			ContentView.Layer.BorderColor = UIColor.LightGray.CGColor;
-			ContentView.Layer.BorderWidth = 2.0f;
-			ContentView.BackgroundColor = UIColor.White;
-			//	ContentView.Transform = CGAffineTransform.MakeScale (0.8f, 0.8f);
-
-			imageView = new UIImageView (frame);
-			imageView.Center = ContentView.Center;
-			imageView.Transform = CGAffineTransform.MakeScale (0.7f, 0.7f);
-
-			ContentView.AddSubview (imageView);
+			txtView = new UILabel (new RectangleF(10,10,300,30));
+			txtView.TextColor = UIColor.White;
+			txtView.Font = UIFont.FromName("Helvetica-Bold", 20f);
+		
+			ContentView.AddSubview (txtView);
 		}
 
-		public UIImage Image {
+		public string Text {
 			set {
-				imageView.Image = value;
+				txtView.Text = value;
 			}
 		}
 
 
+	}
+
+	public class GridItemSelectedViewOverlay : UIView
+	{
+
+		public GridItemSelectedViewOverlay (RectangleF frame) : base(frame)
+		{
+			BackgroundColor = UIColor.Clear;
+		}
+
+		public override void Draw (RectangleF rect)
+		{
+			using (var g = UIGraphics.GetCurrentContext())
+			{
+				g.SetLineWidth(10);
+				UIColor.FromRGB(64,30,168).SetStroke ();
+				UIColor.Clear.SetFill ();
+
+				//create geometry
+				var path = new CGPath ();
+				path.AddRect (rect);
+				path.CloseSubpath();
+
+				//add geometry to graphics context and draw it
+				g.AddPath(path);
+				g.DrawPath(CGPathDrawingMode.Stroke);
+			}
+		}
 	}
 }
 

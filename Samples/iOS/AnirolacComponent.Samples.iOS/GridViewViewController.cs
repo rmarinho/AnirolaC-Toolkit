@@ -26,26 +26,14 @@ namespace AnirolacComponent.Samples.iOS
 
 	public class TableSource : UICollectionViewDataSource
 	{
-		static NSString animalCellId = new NSString ("AnimalCell");
+		static NSString animalCellId = new NSString ("GridViewCell");
 
 		List<string> items = new List<string> ();
 		public TableSource ()
 		{
-			items.Add ("ola");
-			items.Add ("adeus");
-			items.Add ("ola");
-			items.Add ("adeus");
-			items.Add ("ola");
-			items.Add ("adeus");
-			items.Add ("ola");
-			items.Add ("adeus");
-			items.Add ("ola");
-			items.Add ("adeus");
-			items.Add ("ola");
-			items.Add ("adeus");
-			items.Add ("ola");
-			items.Add ("adeus");
-
+			for (int i = 0; i < 100; i++) {
+				items.Add ("hello");
+			}
 		}
 		#region implemented abstract members of UICollectionViewDataSource
 		public override int GetItemsCount (UICollectionView collectionView, int section)
@@ -56,9 +44,9 @@ namespace AnirolacComponent.Samples.iOS
 		{
 			var animalCell = (GridViewItemCell)collectionView.DequeueReusableCell (animalCellId, indexPath);
 
-			var animal = items [indexPath.Row];
+			var text = items [indexPath.Row];
 
-			animalCell.Image = UIImage.FromFile("algarvesurfschool3.jpg");
+			animalCell.Text = text;
 
 			return animalCell;
 		}

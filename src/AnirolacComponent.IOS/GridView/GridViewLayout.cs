@@ -8,40 +8,44 @@ namespace AnirolacComponent
 	public class GridViewLayout : UICollectionViewLayout
 	{
 	
-		int margin = 10;
-		private SizeF ItemSize;
-		int cellCount = 20;
-	
-		int nRows =5;
+		public int Margin = 10;
+		public SizeF ItemSize = new SizeF(0,0);
 
+		int cellCount = 0;
+		int nRows =0;
 		int nColumns =0;
-
-		double rowH = 0.0;
+		float _contentWidth = 0;
+		float rowH = 0;
 		static NSString myDecorationViewId = new NSString ("MyDecorationView");
 
 		public GridViewLayout (SizeF itemSize, int margn)
 		{
-			margin = margn;
+			Margin = margn;
 			ItemSize = itemSize;
 			RegisterClassForDecorationView (typeof(MyDecorationView), myDecorationViewId);
 		}
-
+		bool initialized = false;
 		public override void PrepareLayout ()
 		{
-			base.PrepareLayout ();
-
+			currentRow = 0;
+			currentColumn = 0;
+			cellCount = CollectionView.NumberOfItemsInSection (0);
+		
 			SizeF size = CollectionView.Frame.Size;
-			nRows = (int)Math.Round (size.Height / (ItemSize.Height + margin *2),0);
+			nRows = (int)Math.Round (size.Height / (ItemSize.Height + Margin *2),0);
+			nColumns = (int)Math.Round ((double)(cellCount / nRows));
 			//this expands layout
 			rowH = size.Height / nRows;
 			//this sets row height same as itemheight
 			rowH = ItemSize.Height;
-			cellCount = CollectionView.NumberOfItemsInSection (0);
+			_contentWidth = ItemSize.Width * (nColumns + 1);
 		}
 
 		public override SizeF CollectionViewContentSize {
 			get {
-				return CollectionView.Frame.Size;
+				var rect = CollectionView.Frame;
+				rect.Width = _contentWidth;
+				return rect.Size;
 			}
 		}
 
@@ -57,8 +61,8 @@ namespace AnirolacComponent
 			UICollectionViewLayoutAttributes attributes = UICollectionViewLayoutAttributes.CreateForCell (path);
 			attributes.Size = ItemSize;
 
-			var x = (currentColumn * ItemSize.Width) + (ItemSize.Width /2) + (margin * currentColumn+1);
-			var y = (rowH * currentRow) +( ItemSize.Height /2) + (margin * currentRow+1) ;
+			var x = (currentColumn * ItemSize.Width) + (ItemSize.Width /2) + (Margin * currentColumn+1);
+			var y = (rowH * currentRow) +( ItemSize.Height /2) + (Margin * currentRow+1) ;
 			attributes.Center = new PointF((float)x,(float)y);
 		
 			currentRow++;
@@ -81,6 +85,7 @@ namespace AnirolacComponent
 			}
 
 			var decorationAttribs = UICollectionViewLayoutAttributes.CreateForDecorationView (myDecorationViewId, NSIndexPath.FromItemSection (0, 0));
+		
 			decorationAttribs.Size = CollectionView.Frame.Size;
 			decorationAttribs.Center = CollectionView.Center;
 			decorationAttribs.ZIndex = -1;
@@ -88,6 +93,7 @@ namespace AnirolacComponent
 
 			return attributes;
 		}
+
 
 	}
 

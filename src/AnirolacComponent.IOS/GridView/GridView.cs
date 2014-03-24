@@ -7,10 +7,11 @@ namespace AnirolacComponent
 {
 	public class GridView : UICollectionView
 	{
-		static NSString animalCellId = new NSString ("AnimalCell");
+		static NSString animalCellId = new NSString ("GridViewCell");
 	
 		public GridView () : this(default(RectangleF)){}
-		public GridView (RectangleF frm) : base(frm,new GridViewLayout(new SizeF(200,150),5))
+		//UICollectionViewFlowLayout()
+		public GridView (RectangleF frm) : base(frm,  new GridViewLayout(new SizeF(200,100),10) )
 		{
 
 			this.AutoresizingMask = UIViewAutoresizing.All;
