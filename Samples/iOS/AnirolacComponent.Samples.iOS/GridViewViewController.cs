@@ -47,7 +47,7 @@ namespace AnirolacComponent.Samples.iOS
 			var text = items [indexPath.Row];
 
 			animalCell.Text = text;
-
+			animalCell.RowSpan = 2;
 			return animalCell;
 		}
 		#endregion
