@@ -25,6 +25,7 @@ namespace AnirolacComponent
 			txtView.TextColor = UIColor.White;
 			txtView.Font = UIFont.FromName("Helvetica-Bold", 20f);
 		
+
 			ContentView.AddSubview (txtView);
 		}
 
@@ -34,7 +35,18 @@ namespace AnirolacComponent
 			}
 		}
 
+		private int _rowSpan =1; 
+		public int RowSpan {
+			get {return _rowSpan; }
+			set{_rowSpan = value;}
+		}
 
+
+		private int _rowColumn =1; 
+		public int RowColumn {
+			get {return _rowColumn; }
+			set{_rowColumn = value;}
+		}
 	}
 
 	public class GridItemSelectedViewOverlay : UIView

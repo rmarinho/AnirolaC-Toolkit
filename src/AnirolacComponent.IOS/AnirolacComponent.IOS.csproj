@@ -37,13 +37,14 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="GridView\" />
+    <Folder Include="ImageGallery\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="ImageGallery.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="GridView\GridViewLayout.cs" />
     <Compile Include="GridView\GridView.cs" />
     <Compile Include="GridView\GridViewItemCell.cs" />
+    <Compile Include="ImageGallery\ImageGallery.cs" />
   </ItemGroup>
 </Project>

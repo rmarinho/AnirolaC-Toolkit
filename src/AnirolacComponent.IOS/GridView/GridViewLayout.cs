@@ -11,6 +11,7 @@ namespace AnirolacComponent
 		public int Margin = 10;
 		public SizeF ItemSize = new SizeF(0,0);
 
+		SizeF contentFrameSize = new SizeF(0,0);
 		int cellCount = 0;
 		int nRows =0;
 		int nColumns =0;
@@ -22,24 +23,28 @@ namespace AnirolacComponent
 		{
 			Margin = margn;
 			ItemSize = itemSize;
+
 			RegisterClassForDecorationView (typeof(MyDecorationView), myDecorationViewId);
 		}
-		bool initialized = false;
 		public override void PrepareLayout ()
 		{
 			currentRow = 0;
 			currentColumn = 0;
-			cellCount = CollectionView.NumberOfItemsInSection (0);
 		
-			SizeF size = CollectionView.Frame.Size;
-			nRows = (int)Math.Round (size.Height / (ItemSize.Height + Margin *2),0);
-			nColumns = (int)Math.Round ((double)(cellCount / nRows));
-			//this expands layout
-			rowH = size.Height / nRows;
-			//this sets row height same as itemheight
-			rowH = ItemSize.Height;
-			_contentWidth = ItemSize.Width * (nColumns + 1);
+			if ( contentFrameSize != CollectionView.Frame.Size ) {
+				cellCount = CollectionView.NumberOfItemsInSection (0);
+				contentFrameSize = CollectionView.Frame.Size;
+				nRows = (int)Math.Round (contentFrameSize.Height / (ItemSize.Height + Margin * 2), 0);
+				nColumns = (int)Math.Round ((double)(cellCount / nRows));
+				//this expands layout
+				rowH = contentFrameSize.Height / nRows;
+				//this sets row height same as itemheight
+				rowH = ItemSize.Height;
+				_contentWidth = ItemSize.Width * (nColumns + 1);
+		
+			}
 		}
+
 
 		public override SizeF CollectionViewContentSize {
 			get {
@@ -56,21 +61,38 @@ namespace AnirolacComponent
 
 		int currentRow = 0;
 		int currentColumn = 0;
+
+	
 		public override UICollectionViewLayoutAttributes LayoutAttributesForItem (NSIndexPath path)
 		{
 			UICollectionViewLayoutAttributes attributes = UICollectionViewLayoutAttributes.CreateForCell (path);
-			attributes.Size = ItemSize;
+			var cell = CollectionView.CellForItem (path) as GridViewItemCell;
+			var rowspan = 3;
+			var colspan = 2;
+			if (cell != null) {
+			
+			}
+			var currentSize = new SizeF(ItemSize.Width,ItemSize.Height);
+			currentSize.Width *= colspan;
+			currentSize.Width += Margin*(colspan-1);;
+			currentSize.Height *= rowspan;
+			currentSize.Height += Margin*(rowspan-1);
 
-			var x = (currentColumn * ItemSize.Width) + (ItemSize.Width /2) + (Margin * currentColumn+1);
-			var y = (rowH * currentRow) +( ItemSize.Height /2) + (Margin * currentRow+1) ;
-			attributes.Center = new PointF((float)x,(float)y);
+			attributes.Size = currentSize;
 		
-			currentRow++;
-			if(currentRow == nRows)
+			currentRow+=rowspan;
+			//we need another row
+			if(currentRow>= nRows)
 			{
 				currentColumn++;
-				currentRow = 0;	
+				currentRow = rowspan;	
 			}
+			var x = (currentColumn * currentSize.Width) + (currentSize.Width /2) + (Margin * (currentColumn+1));
+			var y = ((currentRow-rowspan) * rowH) + (currentSize.Height /2)  + (Margin * currentRow+1);
+		
+			attributes.Center = new PointF((float)x,(float)y);
+		
+		
 		
 			return attributes;
 		}
