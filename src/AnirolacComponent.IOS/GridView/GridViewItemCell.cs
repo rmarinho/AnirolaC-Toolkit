@@ -42,10 +42,10 @@ namespace AnirolacComponent
 		}
 
 
-		private int _rowColumn =1; 
-		public int RowColumn {
-			get {return _rowColumn; }
-			set{_rowColumn = value;}
+		private int _columnSpan=1; 
+		public int ColumnSpan {
+			get {return _columnSpan; }
+			set{_columnSpan = value;}
 		}
 	}
 

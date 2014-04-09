@@ -24,15 +24,39 @@ namespace AnirolacComponent.Samples.iOS
 		}
 	}
 
+	public class Tile {
+		public string Text {
+			get;
+			set;
+		}
+
+		public int RowSpan {
+			get;
+			set;
+		}
+		public int ColumnSpan {
+			get;
+			set;
+		}
+
+	}
 	public class TableSource : UICollectionViewDataSource
 	{
-		static NSString animalCellId = new NSString ("GridViewCell");
+		static NSString CellId = new NSString ("GridViewCell");
 
-		List<string> items = new List<string> ();
+		Random rand = new Random (1);
+		List<Tile> items = new List<Tile> ();
 		public TableSource ()
 		{
 			for (int i = 0; i < 100; i++) {
-				items.Add ("hello " +  i);
+				var newTile = new Tile() { Text="hello " +  i, RowSpan=1,ColumnSpan=1 };
+				if (i == 5)
+					newTile.ColumnSpan = newTile.RowSpan = 2;
+				if (i == 10)
+					newTile.ColumnSpan = newTile.RowSpan = 2;
+//				if (i == 16)
+//					newTile.ColumnSpan = newTile.RowSpan = 2;
+				items.Add ( newTile);
 			}
 		}
 		#region implemented abstract members of UICollectionViewDataSource
@@ -42,12 +66,13 @@ namespace AnirolacComponent.Samples.iOS
 		}
 		public override UICollectionViewCell GetCell (UICollectionView collectionView, NSIndexPath indexPath)
 		{
-			var animalCell = (GridViewItemCell)collectionView.DequeueReusableCell (animalCellId, indexPath);
+			var animalCell = (GridViewItemCell)collectionView.DequeueReusableCell (CellId, indexPath);
 
-			var text = items [indexPath.Row];
+			var item = items [indexPath.Row];
 
-			animalCell.Text = text;
-			animalCell.RowSpan = 2;
+			animalCell.Text = item.Text;
+			animalCell.RowSpan = item.RowSpan;
+			animalCell.ColumnSpan = item.ColumnSpan;
 			return animalCell;
 		}
 		#endregion

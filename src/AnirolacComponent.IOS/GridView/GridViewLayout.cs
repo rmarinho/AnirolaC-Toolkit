@@ -2,6 +2,8 @@
 using MonoTouch.UIKit;
 using System.Drawing;
 using MonoTouch.Foundation;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace AnirolacComponent
 {
@@ -11,6 +13,7 @@ namespace AnirolacComponent
 		public int Margin = 10;
 		public SizeF ItemSize = new SizeF(0,0);
 
+		Dictionary<KeyValuePair<int,int>,bool> matrix = new 	Dictionary<KeyValuePair<int,int>,bool> ();
 		SizeF contentFrameSize = new SizeF(0,0);
 		int cellCount = 0;
 		int nRows =0;
@@ -62,39 +65,70 @@ namespace AnirolacComponent
 		int currentRow = 0;
 		int currentColumn = 0;
 
+		void PaintItem (UICollectionViewLayoutAttributes attributes,SizeF currentSize, int rowspan, int colspan)
+		{
+
+		
+			//we need another column
+			if (currentRow+rowspan > nRows) {
+				currentColumn++;
+				currentRow = 0;
+			
+			}
+			bool keepLooping = true;
+			bool canDraw = true;
+			for (int i = currentRow; i < currentRow + rowspan && keepLooping; i++) {
+				for (int j = currentColumn; j < currentColumn + colspan; j++) {
+
+					var exists = matrix.FirstOrDefault (c => c.Key.Key == i && c.Key.Value == j);
+					if(canDraw)
+						canDraw = !exists.Value;
+
+				}
+
+			}
+			if (canDraw) {
+				for (int i = currentRow; i < currentRow + rowspan; i++) {
+					for (int j = currentColumn; j < currentColumn + colspan; j++) {
+						matrix.Add (new KeyValuePair<int, int> (i, j), true);
+					}
+				}
+				var x = (currentColumn * ItemSize.Width) + (currentSize.Width / 2) + (Margin * (currentColumn + 1));
+				var y = ((currentRow) * rowH) + (currentSize.Height / 2) + (Margin * (currentRow));
+
+				attributes.Center = new PointF ((float)x, (float)y);
+				currentRow += rowspan;
+			} else {
+				currentRow++;
+				PaintItem (attributes, currentSize, rowspan, colspan);
+			}
+
+		
+		}
 	
 		public override UICollectionViewLayoutAttributes LayoutAttributesForItem (NSIndexPath path)
 		{
-			UICollectionViewLayoutAttributes attributes = UICollectionViewLayoutAttributes.CreateForCell (path);
-			var cell = CollectionView.CellForItem (path) as GridViewItemCell;
-			var rowspan = 3;
-			var colspan = 2;
-			if (cell != null) {
+			if (path.Item == 0) {
+				matrix.Clear ();
 			
 			}
-			var currentSize = new SizeF(ItemSize.Width,ItemSize.Height);
+			UICollectionViewLayoutAttributes attributes = UICollectionViewLayoutAttributes.CreateForCell (path);
+			var cell = CollectionView.CellForItem (path) as GridViewItemCell;
+			var rowspan = 1;
+			var colspan = 1;
+			if (cell != null) {
+				rowspan = cell.RowSpan;
+				colspan = cell.ColumnSpan;
+			}
+			var currentSize = new SizeF (ItemSize.Width, ItemSize.Height);
 			currentSize.Width *= colspan;
-			currentSize.Width += Margin*(colspan-1);;
+			currentSize.Width += Margin * (colspan - 1);
 			currentSize.Height *= rowspan;
-			currentSize.Height += Margin*(rowspan-1);
-
+			currentSize.Height += Margin * (rowspan - 1);
 			attributes.Size = currentSize;
 		
-			currentRow+=rowspan;
-			//we need another row
-			if(currentRow>= nRows)
-			{
-				currentColumn++;
-				currentRow = rowspan;	
-			}
-			var x = (currentColumn * currentSize.Width) + (currentSize.Width /2) + (Margin * (currentColumn+1));
-			var y = ((currentRow-rowspan) * rowH) + (currentSize.Height /2)  + (Margin * currentRow+1);
-		
-			attributes.Center = new PointF((float)x,(float)y);
-		
-		
-		
-			return attributes;
+			PaintItem (attributes, currentSize,rowspan, colspan);
+				return attributes;
 		}
 
 		public override UICollectionViewLayoutAttributes[] LayoutAttributesForElementsInRect (RectangleF rect)
@@ -106,7 +140,8 @@ namespace AnirolacComponent
 				attributes [i] = LayoutAttributesForItem (indexPath);
 			}
 
-			var decorationAttribs = UICollectionViewLayoutAttributes.CreateForDecorationView (myDecorationViewId, NSIndexPath.FromItemSection (0, 0));
+			var decorationAttribs = UICollectionViewLayoutAttributes.CreateForDecorationView (myDecorationViewId, 
+				NSIndexPath.FromItemSection (0, 0));
 		
 			decorationAttribs.Size = CollectionView.Frame.Size;
 			decorationAttribs.Center = CollectionView.Center;
